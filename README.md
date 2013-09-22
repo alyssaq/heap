@@ -1,4 +1,4 @@
-# [Heap]( http://en.wikipedia.org/wiki/Heap_(data_structure) ) Implementation in C++
+# [Heap]( http://en.wikipedia.org/wiki/Heap_\(data_structure\) ) Implementation in C++
 
 Required:   
 Download the test framework at http://code.google.com/p/googletest/   

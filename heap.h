@@ -1,3 +1,11 @@
+/*
+  Heap using an array
+  Enables us to represent binary trees without pointers:
+  - Left child sits at 2n
+  - Right child sits at 2n + 1
+  - Parent sits at floor(n/2)
+*/
+
 #ifndef HEAP_H
 #define HEAP_H
 
@@ -6,18 +14,32 @@
 
 class Heap {
   std::vector<int> queue_;
-  unsigned long size_;
+  unsigned int size_;
 
-  // Called by insert() when the parent is greater than current
+  // Called by insert()
+  // If the parent's value is greater than current
+  //  the current item bubbles up till we reach root
   void bubbleUp(int idx);
+  // Called by delete() 
+  // If the current is greater than children
+  //  the current item bubbles down till no more children
+  void bubbleDown(int idx);
+  // Used by bubbleDown()
+  //  Get the index of the min value 
+  //  between 3 given indices to the heap array.
+  int getMinIdx(int aIdx, int bIdx, int cIdx);
 
 public:
   Heap() : queue_(1,0), size_(0) {};
   ~Heap() {};
   bool isEmpty() const;
-  int getItem(int idx) const;
-  int parent(int n) const;
+  int size() const;
+  int getItem(unsigned int idx) const;
+  int parent(unsigned int idx) const;
+  int child(unsigned int idx) const;
   void insert(int val);
+  int find(int val) const;
+  void remove(int val);
   std::string toString() const;
 };
 
