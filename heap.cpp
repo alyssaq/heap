@@ -33,6 +33,13 @@ int Heap::child(unsigned int idx) const {
   return (2 * idx);
 }
 
+int Heap::find(int val) const {
+  for (unsigned int i = 1; i <= size_; i++) {
+    if (queue_[i] == val) return i;
+  }
+  return -1;
+}
+
 void Heap::bubbleUp(int idx) {
   int parentIdx = parent(idx);
   if (parentIdx == -1) return; //base case: root of heap
@@ -47,13 +54,6 @@ void Heap::insert(int val) {
   queue_.push_back(val);
   size_++;
   bubbleUp(size_);
-}
-
-int Heap::find(int val) const {
-  for (unsigned int i = 1; i <= size_; i++) {
-    if (queue_[i] == val) return i;
-  }
-  return -1;
 }
 
 // @Precondition: index aIdx and bIdx exist in the array
@@ -87,6 +87,24 @@ void Heap::remove(int val) {
   queue_[idx] = queue_[size_--]; // swap current with last item
   queue_.resize(size_ + 1); //idx 0 is a dud item
   bubbleDown(idx);
+}
+
+int Heap::extractMin() {
+  if (isEmpty()) throw "Empty Heap!";
+  
+  int min = queue_[1];
+  remove(min);
+  return min;
+}
+
+vector<int> Heap::heapSort() {
+  vector<int> sortedItems;
+  sortedItems.reserve(size_);
+  while(!isEmpty()) {
+    sortedItems.push_back(extractMin());
+  }
+
+  return sortedItems;
 }
 
 string Heap::toString() const {

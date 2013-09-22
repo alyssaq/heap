@@ -4,6 +4,7 @@
 
 #include <vector>
 #include <iterator>
+#include <sstream> 
 
 #include "gtest/gtest.h" // Google testing framework.
 #include "heap.h"
@@ -11,6 +12,15 @@
 using namespace std;
 
 class HeapTest : public testing::Test  {
+ public: 
+  std::string vector2Str(std::vector<int> &v) const { 
+    std::ostringstream sstream;
+    copy(v.begin(), v.end() - 1, std::ostream_iterator<int>(sstream, " "));
+    sstream << *(v.end() - 1);
+    
+    return sstream.str();
+  }
+
  protected:
   // SetUp() is run immediately before a test starts.
   virtual void SetUp() {
@@ -101,3 +111,24 @@ TEST_F(HeapTest, remove) {
   EXPECT_EQ(4, heap_.size());
   EXPECT_EQ("2 3 10 7", heap_.toString());
 }
+
+TEST_F(HeapTest, extractMin) {
+  try {
+    Heap heap;
+    heap.extractMin();
+  } catch (const char *msg) {
+    EXPECT_EQ("Empty Heap!", msg);
+  }
+
+  EXPECT_EQ(1, heap_.extractMin());
+  EXPECT_EQ(4, heap_.size());
+}
+
+TEST_F(HeapTest, heapSort) {
+  EXPECT_EQ(5, heap_.size());
+  std::vector<int> sortedItems = heap_.heapSort();
+  EXPECT_EQ(0, heap_.size());
+  EXPECT_EQ(5, sortedItems.size());
+  EXPECT_EQ("1 2 3 7 10", vector2Str(sortedItems));
+}
+
