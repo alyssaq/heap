@@ -8,9 +8,9 @@ class Heap {
   unsigned long size_;
 
 public:
-  Heap() : size_(0) {};
-  ~Heap();
-  int isEmpty() const;
+  Heap() : queue_(1,0), size_(0) {};
+  ~Heap() {};
+  bool isEmpty() const;
   int parent(int n) const;
   void insert(int val);
 
