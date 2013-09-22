@@ -40,7 +40,7 @@ public:
   int               find      (int val) const;
   void              insert    (int val);
   void              remove    (int val);
-  int               extractMin(); 
+  int               extractMin(); //Removes and returns min value
   std::vector<int>  heapSort  (); //O(n log n)
   std::string       toString  () const;
 };
