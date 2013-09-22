@@ -62,12 +62,11 @@ int Heap::getMinIdx(int aIdx, int bIdx, int cIdx) {
 
   if (cIdx > (int) size_) { //the last right child doesnt exist
     return isLeftSmaller ? aIdx : bIdx;
-  }
-
-  if (isLeftSmaller)
+  } else if (isLeftSmaller) {
     return (queue_[aIdx] < queue_[cIdx]) ? aIdx : cIdx;
-  else
+  } else {
     return (queue_[bIdx] < queue_[cIdx]) ? bIdx : cIdx;
+  }
 }
 
 void Heap::bubbleDown(int idx) {
