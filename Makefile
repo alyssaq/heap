@@ -30,7 +30,7 @@ TESTS = unittest.out
 # definition.
 GTEST_HEADERS = $(GTEST_DIR)/include/gtest/*.h \
                 $(GTEST_DIR)/include/gtest/internal/*.h
-GTEST_OBJECT = gtest_main.a 
+GTEST_OBJECT = gtest/gtest_main.a 
 # House-keeping build targets.
 
 all : $(TESTS)
