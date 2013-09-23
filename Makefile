@@ -30,7 +30,7 @@ TESTS = unittest.out
 # definition.
 GTEST_HEADERS = $(GTEST_DIR)/include/gtest/*.h \
                 $(GTEST_DIR)/include/gtest/internal/*.h
-
+GTEST_OBJECT = gtest_main.a 
 # House-keeping build targets.
 
 all : $(TESTS)
@@ -65,16 +65,17 @@ gtest.a : gtest-all.o
 gtest_main.a : gtest-all.o gtest_main.o
 	$(AR) $(ARFLAGS) $@ $^
 
+.INTERMEDIATE : gtest_main.o gtest-all.o gtest.a gtest_main.a 
 # Builds a sample test.  A test should link with either gtest.a or
 # gtest_main.a, depending on whether it defines its own main()
 # function.
 
-heap.o : $(USER_DIR)/heap.cpp $(USER_DIR)/heap.h $(GTEST_HEADERS)
+heap.o : $(USER_DIR)/heap.cpp $(USER_DIR)/heap.h $(GTEST_OBJECT)
 	$(CXX) $(CPPFLAGS) $(CXXFLAGS) -c $(USER_DIR)/heap.cpp
 
 unittest.o : $(USER_DIR)/unittest.cpp \
-             heap.o $(GTEST_HEADERS)
+             heap.o $(GTEST_OBJECT)
 	$(CXX) $(CPPFLAGS) $(CXXFLAGS) -c $(USER_DIR)/unittest.cpp
 
-$(TESTS) : heap.o unittest.o gtest_main.a
+$(TESTS) : heap.o unittest.o $(GTEST_OBJECT)
 	$(CXX) $(CPPFLAGS) $(CXXFLAGS) -lpthread $^ -o $@
