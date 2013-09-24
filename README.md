@@ -16,7 +16,7 @@ You should see all tests PASSED.
 - **Insert** - *O(log n)*: add a new item to the heap
 - **Extract min** - *O(log n)*: remove an item with minimum value    
 - **Delete** - *O(log n)*: remove an item from the heap
-- **Heapify (bubbleUp/bubbleDown)** - *O(n)*: rearrage heap to maintain its property
+- **bubbleUp/bubbleDown** - *O(log n)*: rearrage heap to maintain its property
 - **Heapsort** - *O(n log n)*: calls extract-min *n* items to sort the heap
 
 ###Applications:
