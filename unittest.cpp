@@ -11,16 +11,15 @@
 
 using namespace std;
 
-class HeapTest : public testing::Test  {
- public: 
-  std::string vector2Str(std::vector<int> &v) const { 
-    std::ostringstream sstream;
-    copy(v.begin(), v.end() - 1, std::ostream_iterator<int>(sstream, " "));
-    sstream << *(v.end() - 1);
-    
-    return sstream.str();
-  }
+static const std::string vector2Str(std::vector<int> &v) { 
+  std::ostringstream sstream;
+  copy(v.begin(), v.end() - 1, std::ostream_iterator<int>(sstream, " "));
+  sstream << *(v.end() - 1);
+  
+  return sstream.str();
+}
 
+class HeapTest : public testing::Test  {
  protected:
   // SetUp() is run immediately before a test starts.
   virtual void SetUp() {
@@ -90,10 +89,11 @@ TEST_F(HeapTest, insert) {
 }
 
 TEST_F(HeapTest, find) {
-  EXPECT_EQ(-1, oneItemHeap_.find(3));
-  EXPECT_EQ(1,  oneItemHeap_.find(1));
-  EXPECT_EQ(3,  heap_.find(10));
-  EXPECT_EQ(5,  heap_.find(3));
+  EXPECT_EQ(-1, oneItemHeap_.find(1, 3));
+  EXPECT_EQ(1,  oneItemHeap_.find(1, 1));
+  EXPECT_EQ(-1, heap_.find(13, 10));
+  EXPECT_EQ(3,  heap_.find(1, 10));
+  EXPECT_EQ(5,  heap_.find(1, 3));
 }
 
 TEST_F(HeapTest, remove) {
@@ -131,4 +131,25 @@ TEST_F(HeapTest, heapSort) {
   EXPECT_EQ(5, sortedItems.size());
   EXPECT_EQ("1 2 3 7 10", vector2Str(sortedItems));
 }
+
+TEST(MakeHeapTest, makeHeap) {
+  Heap heap;
+
+  int oneArray[] = {0};
+  heap.makeHeap(oneArray, 1);
+  EXPECT_EQ("0", heap.toString());
+
+  heap.clear();
+  int twoArray[] = {3, 1};
+  heap.makeHeap(twoArray, 2);
+  EXPECT_EQ("1 3", heap.toString());
+
+  heap.clear();
+  int manyArray[] = {10, 24, 13, 2, 11, 7, -1, -3, 0, 5};
+  heap.makeHeap(manyArray, 10);
+  EXPECT_EQ("-3 0 -1 2 5 7 13 10 24 11", heap.toString());
+  vector<int> v = heap.heapSort();
+  EXPECT_EQ("-3 -1 0 2 5 7 10 11 13 24", vector2Str(v));
+}
+
 

@@ -11,12 +11,19 @@ using namespace std;
 typedef vector<int>::iterator vecIter;
 typedef vector<int>::const_iterator vecCiter;
 
+Heap::Heap() : queue_(1,0), size_(0) {}
+
 bool Heap::isEmpty() const {
   return (size_ == 0);
 }
 
 int Heap::size() const {
   return size_;
+}
+
+void Heap::clear() {
+  queue_.clear();
+  queue_.push_back(0); //first item is a dud
 }
 
 int Heap::getItem(unsigned int idx) const {
@@ -33,14 +40,21 @@ int Heap::child(unsigned int idx) const {
   return (2 * idx);
 }
 
-int Heap::find(int val) const {
-  for (unsigned int i = 1; i <= size_; i++) {
-    if (queue_[i] == val) return i;
-  }
-  return -1;
-}
+int Heap::find(unsigned int idx, int val) const { //O(log n)
+  if (idx > size_) return -1; //base case: idx out of bounds
+  if (val < queue_[idx]) return -1;   //base case: val not in min-heap
+  if (queue_[idx] == val) return idx; //Found the val, return its index
 
-void Heap::bubbleUp(int idx) {
+  int childIdx = child(idx), i = -1;
+
+  if (childIdx != -1) { //find in left and right children
+    i = max(find(childIdx, val), find(childIdx + 1, val));
+  }
+
+  return i;
+} 
+
+void Heap::bubbleUp(int idx) { //O(log n)
   int parentIdx = parent(idx);
   if (parentIdx == -1) return; //base case: root of heap
 
@@ -69,7 +83,7 @@ int Heap::getMinIdx(int aIdx, int bIdx, int cIdx) {
   }
 }
 
-void Heap::bubbleDown(int idx) {
+void Heap::bubbleDown(int idx) { //O(log n)
   int childIdx = child(idx);
   if (childIdx == -1) return; //base case: no children left
   int minIdx = getMinIdx(idx, childIdx, childIdx + 1);
@@ -80,8 +94,8 @@ void Heap::bubbleDown(int idx) {
   }
 }
 
-void Heap::remove(int val) {
-  int idx = find(val);
+void Heap::remove(int val) { //O(2 * log n)
+  int idx = find(1, val);
   if (idx == -1) return;
 
   queue_[idx] = queue_[size_--]; // swap current with last item
@@ -89,7 +103,7 @@ void Heap::remove(int val) {
   bubbleDown(idx);
 }
 
-int Heap::extractMin() {
+int Heap::extractMin() { //Special case of remove: O(2 * log n)
   if (isEmpty()) throw "Empty Heap!";
   
   int min = queue_[1];
@@ -97,7 +111,7 @@ int Heap::extractMin() {
   return min;
 }
 
-vector<int> Heap::heapSort() {
+vector<int> Heap::heapSort() { //O(n log n)
   vector<int> sortedItems;
   sortedItems.reserve(size_);
   while(!isEmpty()) {
@@ -105,6 +119,19 @@ vector<int> Heap::heapSort() {
   }
 
   return sortedItems;
+}
+
+// Create the heap given an unsorted array
+void Heap::makeHeap (int array[], int n){ //O(n log n)
+  size_ = n;
+  int i = 0;
+
+  for (; i < n; i++) { // O(n)
+    queue_.push_back(array[i]);
+  }
+  for (i = n; i > 0; i--) {
+    bubbleDown(i); //O(log n)
+  }
 }
 
 string Heap::toString() const {

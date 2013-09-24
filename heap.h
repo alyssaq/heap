@@ -30,16 +30,18 @@ class Heap {
   int getMinIdx  (int aIdx, int bIdx, int cIdx);
 
 public:
-  Heap() : queue_(1,0), size_(0) {};
+  Heap();
   ~Heap() {};
   bool              isEmpty   () const;
   int               size      () const;
+  void              clear     ();
   int               getItem   (unsigned int idx) const;
   int               parent    (unsigned int idx) const;
   int               child     (unsigned int idx) const;
-  int               find      (int val) const;
+  int               find      (unsigned int idx, int val) const;
   void              insert    (int val);
   void              remove    (int val);
+  void              makeHeap   (int array[], int size);
   int               extractMin(); //Removes and returns min value
   std::vector<int>  heapSort  (); //O(n log n)
   std::string       toString  () const;
