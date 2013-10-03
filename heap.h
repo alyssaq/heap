@@ -41,7 +41,7 @@ public:
   int               find      (unsigned int idx, int val) const;
   void              insert    (int val);
   void              remove    (int val);
-  void              makeHeap   (int array[], int size);
+  void              makeHeap  (int array[], int size);
   int               extractMin(); //Removes and returns min value
   std::vector<int>  heapSort  (); //O(n log n)
   std::string       toString  () const;
