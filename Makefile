@@ -14,6 +14,8 @@ GTEST_DIR = ../gtest
 # Where to find user code.
 USER_DIR = .
 
+export CXX=g++
+export CC=gcc
 # Flags passed to the preprocessor.
 # Set Google Test's header directory as a system directory, such that
 # the compiler doesn't generate warnings in Google Test headers.
@@ -71,7 +73,7 @@ gtest_main.a : gtest-all.o gtest_main.o
 # function.
 
 heap.o : $(USER_DIR)/heap.cpp $(USER_DIR)/heap.h $(GTEST_OBJECT)
-	$(CXX) $(CPPFLAGS) $(CXXFLAGS) -c $(USER_DIR)/heap.cpp
+	$(CXX) $(CXXFLAGS) -c $(USER_DIR)/heap.cpp
 
 unittest.o : $(USER_DIR)/unittest.cpp \
              heap.o $(GTEST_OBJECT)
