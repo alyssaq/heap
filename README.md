@@ -19,6 +19,7 @@ You should see all tests PASSED.
 - **Delete** - *O(log n)*: remove an item from the heap
 - **bubbleUp/bubbleDown** - *O(log n)*: rearrage heap to maintain its property
 - **Heapsort** - *O(n log n)*: calls extract-min *n* items to sort the heap
+- **Make heap** - *O(n)*: given an unsorted array, each element for *n* elements has to be added into the internal queue and bubbleDown *O(log n)*. Not all heapify operations are *O(log n)*, this is why you are getting [O(n)](http://www.cs.umd.edu/~meesh/351/mount/lectures/lect14-heapsort-analysis-part.pdf).  
 
 ###Applications:
  - Event manager
@@ -41,3 +42,15 @@ Create a symlink to the gtest folder where Makefile resides.
 To use it, comment out the .INTERMEDIATE line in the Makefile.    
 This will build the gtest object file located at GTEST_DIR.    
 Replace $(GTEST_OBJECT) with $(GTEST_HEADERS)
+
+### Random Trivial
+max-heap vs sorted array:   
+
+1. Find the maximum element quickly:    
+O(1) for both. Root of max-heap and last element in array.    
+2. Delete an element quickly:   
+O(log n) for max-heap. O(n) for array without the element index, otherwise, O(1).   
+3. Form the structure quickly:  
+O(n) to build a heap, O(n log n) to sort an array.      
+4. Find the minimum element quickly:  
+O(log n) to find the min element. O(1) for the array as the first element.   
