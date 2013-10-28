@@ -122,7 +122,7 @@ vector<int> Heap::heapSort() { //O(n log n)
 }
 
 // Create the heap given an unsorted array
-void Heap::makeHeap (int array[], int n){ //O(n log n)
+void Heap::makeHeap (int array[], int n){ //O(n log n)?
   size_ = n;
   int i = 0;
 

@@ -29,7 +29,7 @@ You should see all tests PASSED.
 
 ## Google C++ Testing
 Note that I have included the Google Test object file (gtest_main.a) 
-so that you do not need to download Google's C++ test framework.
+so that you do not need to re-build Google's C++ test framework.
 The object file is built against version 1.7.     
 
 If you wish to re-build another version, you may download the 
@@ -43,7 +43,7 @@ To use it, comment out the .INTERMEDIATE line in the Makefile.
 This will build the gtest object file located at GTEST_DIR.    
 Replace $(GTEST_OBJECT) with $(GTEST_HEADERS)
 
-### Random Trivial
+### Random Trivia
 max-heap vs sorted array:   
 
 1. Find the maximum element quickly:    
