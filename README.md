@@ -1,15 +1,16 @@
 # [Heap]( http://en.wikipedia.org/wiki/Heap_\(data_structure\) ) Implementation in C++
 
-This is an implementation of a **binary min-heap**. Heaps maintain an implicit binary tree structure in an array (I used the STL vector so that we do not have to specify an array size at creation time).   
+This is an implementation of a **binary min-heap**.   
+Heaps maintain an implicit binary tree structure in an array (I used the STL vector so that we do not have to specify an array size at creation time).   
 **Min-heap property**: All nodes are less than or equal of its children. Thus, the minimum key always sits at the top of the heap.
 
-Compile:   
-> make
+Compile (needs googletest header files):   
+    > make
 
 Run:   
-> ./unittest.out
+    > ./unittest.out
 
-You should see all tests PASSED.  
+You should see that all tests have PASSED.  
 
 ###Operations
 *n* = number of items in the heap
@@ -37,7 +38,7 @@ test framework at http://code.google.com/p/googletest/
 
 Move the gtest folder somewhere permenant, e.g. ~/Documents.   
 Create a symlink to the gtest folder where Makefile resides.        
-> ln -s ~/Documents/lib/gtest-1.7.0 gtest  
+    > ln -s ~/Documents/lib/gtest-1.7.0 gtest  
 
 To use it, comment out the .INTERMEDIATE line in the Makefile.    
 This will build the gtest object file located at GTEST_DIR.    
