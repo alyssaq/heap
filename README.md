@@ -5,14 +5,16 @@ Heaps maintain an implicit binary tree structure in an array (I used the STL vec
 **Min-heap property**: All nodes are less than or equal of its children. Thus, the minimum key always sits at the top of the heap.
 
 Compile (needs googletest header files):   
+
     > make
 
 Run:   
+
     > ./unittest.out
 
 You should see that all tests have PASSED.  
 
-###Operations
+##Operations
 *n* = number of items in the heap
 
 - **Insert** - *O(log n)*: add a new item to the heap
@@ -22,7 +24,7 @@ You should see that all tests have PASSED.
 - **Heapsort** - *O(n log n)*: calls extract-min *n* items to sort the heap
 - **Make heap** - *O(n)*: given an unsorted array, each element for *n* elements has to be added into the internal queue and bubbleDown *O(log n)*. Not all heapify operations are *O(log n)*, this is why you are getting [O(n)](http://www.cs.umd.edu/~meesh/351/mount/lectures/lect14-heapsort-analysis-part.pdf).  
 
-###Applications:
+## Applications:
  - Event manager
  - Median maintenance
  - Speeding up Dijkstra's shortest-path algorithm with *n* vertices and *m* edges.   
@@ -44,7 +46,7 @@ To use it, comment out the .INTERMEDIATE line in the Makefile.
 This will build the gtest object file located at GTEST_DIR.    
 Replace $(GTEST_OBJECT) with $(GTEST_HEADERS)
 
-### Random Trivia
+## Random Trivia
 max-heap vs sorted array:   
 
 1. Find the maximum element quickly:    
