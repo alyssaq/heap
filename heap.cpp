@@ -11,6 +11,7 @@ using namespace std;
 typedef vector<int>::iterator vecIter;
 typedef vector<int>::const_iterator vecCiter;
 
+// Add a dud first elem
 Heap::Heap() : queue_(1,0), size_(0) {}
 
 bool Heap::isEmpty() const {
@@ -101,6 +102,7 @@ void Heap::remove(int val) { //O(2 * log n)
   queue_[idx] = queue_[size_--]; // swap current with last item
   queue_.resize(size_ + 1); //idx 0 is a dud item
   bubbleDown(idx);
+  bubbleUp(idx);
 }
 
 int Heap::extractMin() { //Special case of remove: O(2 * log n)
@@ -122,14 +124,27 @@ vector<int> Heap::heapSort() { //O(n log n)
 }
 
 // Create the heap given an unsorted array
-void Heap::makeHeap (int array[], int n){ //O(n log n)?
+void Heap::makeHeap(int array[], int n) { //O(n log n)?
   size_ = n;
   int i = 0;
 
   for (; i < n; i++) { // O(n)
     queue_.push_back(array[i]);
   }
-  for (i = n; i > 0; i--) {
+  for (int i = n; i > 0; i--) {
+    bubbleDown(i); //O(log n)
+  }
+}
+
+// Create the heap given an unsorted vector
+void Heap::makeHeap(std::vector<int> &input) { //O(n log n)?
+  size_ = input.size();
+  vecCiter citer = input.begin();
+
+  for (; citer != input.end(); citer++) { // O(n)
+    queue_.push_back(*citer);
+  }
+  for (int i = size_; i > 0; i--) {
     bubbleDown(i); //O(log n)
   }
 }

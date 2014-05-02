@@ -4,13 +4,23 @@ This is an implementation of a **binary min-heap**.
 Heaps maintain an implicit binary tree structure in an array (I used the STL vector so that we do not have to specify an array size at creation time).   
 **Min-heap property**: All nodes are less than or equal of its children. Thus, the minimum key always sits at the top of the heap.
 
+## Usage
+Compile:
+
+    $ g++ heap.cpp example.cpp
+
+Run:
+
+    $ ./a.out
+
+## Tests
 Compile (needs googletest header files):   
 
-    > make
+    $ make
 
 Run:   
 
-    > ./unittest.out
+    $ ./unittest.out
 
 You should see that all tests have PASSED.  
 
